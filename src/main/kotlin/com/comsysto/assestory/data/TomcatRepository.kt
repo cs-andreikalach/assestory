@@ -1,8 +1,8 @@
 package com.comsysto.assestory.data
 
-import com.comsysto.assestory.data.domain.Tomcat
+import com.comsysto.assestory.data.domain.TomcatInstance
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface TomcatRepository : CrudRepository<Tomcat, String>
+interface TomcatRepository : CrudRepository<TomcatInstance, String>
