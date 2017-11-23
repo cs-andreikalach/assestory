@@ -26,3 +26,52 @@ CREATE
   (linux2)-[:HOSTS {ports:['8090', '8091'], ip:'192.168.20.2', dns:'instance2.petshop.com'}] -> (tomcat2),
   (windows1)-[:HOSTS {ports:['80'], ip:'192.168.20.44', dns:'webservice.petshop.com'}] -> (tomcat3),
   (windows1)-[:HOSTS {ports:['8088'], ip:'192.168.20.44', dns:'stat.petshop.com'}] -> (tomcat4)
+
+// Deployment
+CREATE (petshop:Deployment {name: 'petshop', version: '2.3.0.2', artifact: 'war'})
+CREATE (petshopws:Deployment {name: 'peshopws', version: '1.7.0.0', artifact: 'war'})
+CREATE (petshopstatistic:Deployment {name: 'petshopstatistic', version: '1.6.5.2', artifact: 'war'})
+
+// Tomcat -> Deployment
+CREATE
+    (tomcat1)-[:PROVIDES {context: ['petshop1']}] -> (petshop),
+    (tomcat2)-[:PROVIDES {context: ['petshop2']}] -> (petshop),
+    (tomcat3)-[:PROVIDES {context: ['pethopws']}] -> (petshopws),
+    (tomcat4)-[:PROVIDES {context: ['petshopstatistic']}] -> (petshopstatistic)
+
+// Database
+CREATE (db1:Database {instance: 'db1', port: '5432'})
+CREATE (db2:Database {instance: 'db2', port: '5432'})
+
+// Deployment -> Database
+CREATE
+    (petshop)-[:Uses] -> (db1),
+    (petshop)-[:Uses] -> (db2),
+    (petshopws)-[:Uses] -> (db1),
+    (petshopws)-[:Uses] -> (db2),
+    (petshopstatistic)-[:Uses] -> (db1),
+    (petshopstatistic)-[:Uses] -> (db2)
+
+// Application
+CREATE (petshopApp:Application {name: 'petshop'})
+CREATE (petshopwsApp:Application {name: 'petshopws'})
+CREATE (petshopstatisticApp:Application {name: 'petshopstatistic'})
+
+// Deployment -> Application
+CREATE
+  (petshop)-[:PROVIDES] -> (petshopApp),
+  (petshopws)-[:PROVIDES] -> (petshopwsApp),
+  (petshopstatistic)-[:PROVIDES] -> (petshopstatisticApp)
+
+
+// Service
+CREATE (loginservice:Service {protocol: 'https', typ: 'extern'})
+CREATE (wetterservice:Service {protocol: 'https', typ: 'extern'})
+
+// Deployment -> Service
+CREATE
+  (petshop)-[:Uses] -> (loginservice),
+  (petshop)-[:Uses] -> (wetterservice)
+
+
+
