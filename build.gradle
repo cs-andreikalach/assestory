@@ -53,5 +53,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.jetbrains.kotlin:kotlin-stdlib-jre8")
     compile("org.jetbrains.kotlin:kotlin-reflect")
+    compile 'org.webjars:materializecss:0.100.2'
+    compile 'org.webjars:jquery:2.1.4'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
