@@ -12,4 +12,4 @@ data class OperatingSystem(
         override var state: State,
 
         @Relationship(type = "HOSTS", direction = Relationship.OUTGOING)
-        var os: MutableList<Tomcat>?) : StateEntity()
+        var tomcats: MutableList<Tomcat>?) : StateEntity()
