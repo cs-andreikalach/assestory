@@ -9,4 +9,4 @@ data class Environment(
         @Id var name: String,
 
         @Relationship(type = "PROVIDES", direction = Relationship.OUTGOING)
-        var os: MutableList<OperatingSystem>?)
+        var os: MutableList<OperatingSystem>)
