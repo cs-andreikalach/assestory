@@ -6,18 +6,18 @@ import org.neo4j.ogm.annotation.Relationship
 
 @NodeEntity
 data class OperatingSystem(
-        @Id var host: String,
-        var type: OsType,
-        var version: String,
-        override var state: State,
+    @Id var host: String,
+    var type: OsType,
+    var version: String,
+    override var state: State,
 
-        @Relationship(type = "HOSTS", direction = Relationship.OUTGOING)
-        var tomcats: MutableList<Tomcat>?,
+    @Relationship(type = "HOSTS", direction = Relationship.OUTGOING)
+    var tomcats: MutableList<Tomcat>?,
 
-        @Relationship(type = "HOSTS", direction = Relationship.OUTGOING)
-        var databases: MutableList<Database>?,
+    @Relationship(type = "HOSTS", direction = Relationship.OUTGOING)
+    var databases: MutableList<Database>?,
 
-        @Relationship(type = "HOSTS", direction = Relationship.OUTGOING)
-        var services: MutableList<Service>?
+    @Relationship(type = "HOSTS", direction = Relationship.OUTGOING)
+    var services: MutableList<Service>?
 
 ) : StateEntity()

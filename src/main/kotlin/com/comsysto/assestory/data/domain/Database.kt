@@ -5,6 +5,6 @@ import org.neo4j.ogm.annotation.NodeEntity
 
 @NodeEntity
 data class Database(
-        @Id var instance: String,
-        var port: Int,
-        override var state: State) : StateEntity()
+    @Id var instance: String,
+    var port: Int,
+    override var state: State) : StateEntity()

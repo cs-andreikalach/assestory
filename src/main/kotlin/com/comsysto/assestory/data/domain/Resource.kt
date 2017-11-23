@@ -6,4 +6,4 @@ import org.neo4j.ogm.annotation.Relationship
 
 @NodeEntity
 data class Resource(
-        @Id var name: String)
+    @Id var name: String)

@@ -6,7 +6,7 @@ import org.neo4j.ogm.annotation.Relationship
 
 @NodeEntity
 data class Environment(
-        @Id var name: String,
+    @Id var name: String,
 
-        @Relationship(type = "PROVIDES", direction = Relationship.OUTGOING)
-        var os: MutableList<OperatingSystem>)
+    @Relationship(type = "PROVIDES", direction = Relationship.OUTGOING)
+    var os: MutableList<OperatingSystem>)
