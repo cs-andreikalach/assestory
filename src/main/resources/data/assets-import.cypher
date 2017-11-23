@@ -1,12 +1,12 @@
 // Environments
-CREATE (Production:Environment {title:'Production'})
-CREATE (Test:Environment {title:'Test'})
-CREATE (Work:Environment {title:'Work'})
+CREATE (Production:Environment {name:'Production'})
+CREATE (Test:Environment {name:'Test'})
+CREATE (Work:Environment {name:'Work'})
 
 // OS
-CREATE (Linux1:OperatingSystem {host:'linux1.petshop.com', type:'UbuntuLinux', version: '17.10'})
-CREATE (Linux2:OperatingSystem {host:'linux2.petshop.com', type:'UbuntuLinux', version: '17.10'})
-CREATE (Windows1:OperatingSystem {host:'win.petshop.com', type:'WindowsServer', version: '2014'})
+CREATE (Linux1:OperatingSystem {host:'linux1.petshop.com', type:'UbuntuLinux', version: '17.10', state: 'Online'})
+CREATE (Linux2:OperatingSystem {host:'linux2.petshop.com', type:'UbuntuLinux', version: '17.10', state: 'Online'})
+CREATE (Windows1:OperatingSystem {host:'win.petshop.com', type:'WindowsServer', version: '2014', state: 'Online'})
 
 // Environment -> OS
 CREATE
@@ -15,10 +15,10 @@ CREATE
   (Production)-[:PROVIDES] -> (Windows1)
 
 // Tomcats
-CREATE (Tomcat1:Tomcat {title:'tpPetshop1', version: '7.0.56'})
-CREATE (Tomcat2:Tomcat {title:'tpPetshop2', version: '7.0.56'})
-CREATE (Tomcat3:Tomcat {title:'tpPetService1', version: '7.0.56'})
-CREATE (Tomcat4:Tomcat {title:'tpStatistic', version: '7.0.56'})
+CREATE (Tomcat1:Tomcat {name:'tpPetshop1', version: '7.0.56', state: 'Online'})
+CREATE (Tomcat2:Tomcat {name:'tpPetshop2', version: '7.0.56', state: 'Online'})
+CREATE (Tomcat3:Tomcat {name:'tpPetService1', version: '7.0.56', state: 'Online'})
+CREATE (Tomcat4:Tomcat {name:'tpStatistic', version: '7.0.56', state: 'Online'})
 
 // OS -> Tomcats
 CREATE
