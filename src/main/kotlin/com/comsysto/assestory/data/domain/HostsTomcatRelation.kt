@@ -11,4 +11,13 @@ data class HostsTomcatRelation(
         override var ports: MutableList<String>,
 
         @JsonIgnore @StartNode var operatingSystem: OperatingSystem,
-        @EndNode var tomcat: Tomcat) : HostsRelation()
+        @EndNode var tomcat: Tomcat) : HostsRelation() {
+
+    override fun equals(other: Any?): Boolean {
+        other as HostsTomcatRelation
+        return this.dns == other.dns
+    }
+
+    override fun hashCode() = this.dns.hashCode()
+    override fun toString(): String = dns
+}

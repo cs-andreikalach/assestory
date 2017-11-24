@@ -11,4 +11,13 @@ data class HostsDatabaseRelation(
         override var ports: MutableList<String>,
 
         @JsonIgnore @StartNode var operatingSystem: OperatingSystem,
-        @EndNode var database: Database) : HostsRelation()
+        @EndNode var database: Database) : HostsRelation() {
+
+    override fun equals(other: Any?): Boolean {
+        other as HostsDatabaseRelation
+        return this.dns == other.dns
+    }
+
+    override fun hashCode() = this.dns.hashCode()
+    override fun toString(): String = dns
+}
