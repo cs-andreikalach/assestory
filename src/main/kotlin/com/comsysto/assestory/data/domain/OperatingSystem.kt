@@ -13,9 +13,9 @@ data class OperatingSystem(
         var version: String,
         override var state: State,
 
-        @Relationship(type = "HOSTS")
-        //var tomcats: MutableList<HostsTomcatRelation>?,
+        @Relationship(type = "HOSTS", direction = Relationship.OUTGOING)
         var tomcats: MutableList<Tomcat>?,
+        //var tomcats: MutableList<HostsTomcatRelation>?,
 
         @Relationship(type = "HOSTS", direction = Relationship.OUTGOING)
         var databases: MutableList<Database>?,
