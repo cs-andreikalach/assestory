@@ -26,8 +26,8 @@ CREATE (tomcat3:Tomcat {name:'tpPetService1', version: '7.0.56', state: 'Online'
 CREATE (tomcat4:Tomcat {name:'tpStatistic', version: '7.0.56', state: 'Online'})
 
 // Database
-CREATE (db1:Database {instance: 'db1'})
-CREATE (db2:Database {instance: 'db2'})
+CREATE (db1:Database {instance: 'db1', state: 'Online'})
+CREATE (db2:Database {instance: 'db2', state: 'Online'})
 
 // OS -> Tomcats
 CREATE
@@ -42,9 +42,9 @@ CREATE
   (linux4)-[:HOSTS {ports:['447'], ip:'192.168.30.2', dns:'postgre2.petshop.com'}] -> (db2)
 
 // Deployment
-CREATE (petshop:Deployment {name: 'petshop', version: '2.3.0.2', artifact: 'war'})
-CREATE (petshopws:Deployment {name: 'peshopws', version: '1.7.0.0', artifact: 'war'})
-CREATE (petshopstatistic:Deployment {name: 'petshopstatistic', version: '1.6.5.2', artifact: 'war'})
+CREATE (petshop:Deployment {name: 'petshop', version: '2.3.0.2', artifact: 'war', state: 'Online'})
+CREATE (petshopws:Deployment {name: 'peshopws', version: '1.7.0.0', artifact: 'war', state: 'Online'})
+CREATE (petshopstatistic:Deployment {name: 'petshopstatistic', version: '1.6.5.2', artifact: 'war', state: 'Online'})
 
 // Tomcat -> Deployment
 CREATE
@@ -75,8 +75,8 @@ CREATE
 
 
 // Service
-CREATE (loginservice:Service {name: 'LoginService', protocol: 'https', typ: 'extern'})
-CREATE (wetterservice:Service {name:'WetterService', protocol: 'soap', typ: 'extern'})
+CREATE (loginservice:Service {name: 'LoginService', protocol: 'HTTPS', type: 'Extern', state: 'Online'})
+CREATE (wetterservice:Service {name:'WetterService', protocol: 'SOAP', type: 'Extern', state: 'Online'})
 
 // Deployment -> Service
 CREATE

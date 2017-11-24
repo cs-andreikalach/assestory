@@ -8,5 +8,5 @@ import org.neo4j.ogm.annotation.Relationship
 data class Service(
     @Id var name: String,
     var protocol: Protocol,
-    var serviceType: ServiceType,
+    var type: ServiceType,
     override var state: State) : StateEntity()

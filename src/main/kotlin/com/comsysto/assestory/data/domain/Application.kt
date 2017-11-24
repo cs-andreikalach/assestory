@@ -9,4 +9,4 @@ data class Application(
         @Id var name: String,
 
         @Relationship(type = "USES", direction = Relationship.OUTGOING)
-        var os: MutableList<Resource>)
+        var resources: MutableList<Resource>)

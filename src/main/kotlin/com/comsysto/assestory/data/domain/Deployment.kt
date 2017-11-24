@@ -11,7 +11,7 @@ data class Deployment(
     var artifact: Artifact,
 
     @Relationship(type = "USES", direction = Relationship.OUTGOING)
-    var tomcats: MutableList<Database>?,
+    var databases: MutableList<Database>?,
 
     @Relationship(type = "USES", direction = Relationship.OUTGOING)
     var services: MutableList<Service>?,
