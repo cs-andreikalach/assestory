@@ -12,6 +12,6 @@ data class Tomcat(
         var version: String,
 
         @Relationship(type = "DEPLOYED", direction = Relationship.OUTGOING)
-        var deployments: MutableList<Deployment>?,
+        var deployments: MutableList<DeployedRelation>?,
 
         override var state: State) : StateEntity()
