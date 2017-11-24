@@ -30,7 +30,8 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 noArg {
-    annotation('org.neo4j.ogm.annotation.NodeEntity')
+    annotations('org.neo4j.ogm.annotation.NodeEntity',
+                'org.neo4j.ogm.annotation.RelationshipEntity')
 }
 
 compileKotlin {
