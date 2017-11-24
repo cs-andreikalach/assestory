@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ApplicationRepository : CrudRepository<Application, String> {
-    @Query("match path=(app {name: {name}})<-[]-(artifact)<-[]-(tomcat {state:'Online'})<-[]-(os {state:'Online'})<-[]-(env {name:'Production'}) return count(path)>0")
+    @Query("match path=(app {name: {name}})<-[]-(artifact:Deployment)<-[]-(tomcat:Tomcat {state:'Online'})<-[]-(os:OperatingSystem {state:'Online'})<-[]-(env {name:'Production'}) return count(path)>0")
     fun findApplicationStateByName(@Param("name") name: String): Boolean
 }
