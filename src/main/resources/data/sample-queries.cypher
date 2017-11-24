@@ -1,0 +1,2 @@
+// check if petshop application online is
+match (app {name: 'petshop'})<-[]-(artifact)<-[]-(tomcat {state:'Online'})<-[]-(os {state:'Online'})<-[]-(env {name:'Production'}) return app, artifact, tomcat, os, env
