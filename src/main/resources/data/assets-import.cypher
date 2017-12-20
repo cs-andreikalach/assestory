@@ -1,8 +1,8 @@
 
 // Environments
-CREATE (production:Environment {name:'Production'})
-CREATE (test:Environment {name:'Test'})
-CREATE (work:Environment {name:'Work'})
+CREATE (production:Environment {name:'Production', state: 'Online'})
+CREATE (test:Environment {name:'Test', state: 'Online'})
+CREATE (work:Environment {name:'Work', state: 'Online'})
 
 // OS
 CREATE (linux1:OperatingSystem {host:'linux1.petshop.com', type:'UbuntuLinux', version: '17.10', state: 'Online'})
@@ -20,7 +20,7 @@ CREATE
   (production)-[:PROVIDES] -> (windows1)
 
 // Tomcats
-CREATE (tomcat1:Tomcat {name:'tpPetshop1', version: '7.0.56', state: 'Online'})
+CREATE (tomcat1:Tomcat {name:'tpPetshop1', version: '7.0.56', state: 'Offline'})
 CREATE (tomcat2:Tomcat {name:'tpPetshop2', version: '7.0.56', state: 'Online'})
 CREATE (tomcat3:Tomcat {name:'tpPetService1', version: '7.0.56', state: 'Online'})
 CREATE (tomcat4:Tomcat {name:'tpStatistic', version: '7.0.56', state: 'Online'})
@@ -48,24 +48,24 @@ CREATE (petshopstatistic:Deployment {name: 'petshopstatistic', version: '1.6.5.2
 
 // Tomcat -> Deployment
 CREATE
-    (tomcat1)-[:DEPLOYED {context: ['petshop1']}] -> (petshop),
-    (tomcat2)-[:DEPLOYED {context: ['petshop2']}] -> (petshop),
-    (tomcat3)-[:DEPLOYED {context: ['pethopws']}] -> (petshopws),
-    (tomcat4)-[:DEPLOYED {context: ['petshopstatistic']}] -> (petshopstatistic)
+  (tomcat1)-[:DEPLOYED {context: ['petshop1']}] -> (petshop),
+  (tomcat2)-[:DEPLOYED {context: ['petshop2']}] -> (petshop),
+  (tomcat3)-[:DEPLOYED {context: ['pethopws']}] -> (petshopws),
+  (tomcat4)-[:DEPLOYED {context: ['petshopstatistic']}] -> (petshopstatistic)
 
 // Deployment -> Database
 CREATE
-    (petshop)-[:USES] -> (db1),
-    (petshop)-[:USES] -> (db2),
-    (petshopws)-[:USES] -> (db1),
-    (petshopws)-[:USES] -> (db2),
-    (petshopstatistic)-[:USES] -> (db1),
-    (petshopstatistic)-[:USES] -> (db2)
+  (petshop)-[:USES] -> (db1),
+  (petshop)-[:USES] -> (db2),
+  (petshopws)-[:USES] -> (db1),
+  (petshopws)-[:USES] -> (db2),
+  (petshopstatistic)-[:USES] -> (db1),
+  (petshopstatistic)-[:USES] -> (db2)
 
 // Application
-CREATE (petshopApp:Application {name: 'petshop'})
-CREATE (petshopwsApp:Application {name: 'petshopws'})
-CREATE (petshopstatisticApp:Application {name: 'petshopstatistic'})
+CREATE (petshopApp:Application {name: 'petshop', state: 'Online'})
+CREATE (petshopwsApp:Application {name: 'petshopws', state: 'Online'})
+CREATE (petshopstatisticApp:Application {name: 'petshopstatistic', state: 'Online'})
 
 // Deployment -> Application
 CREATE
@@ -82,3 +82,23 @@ CREATE (wetterservice:Service {name:'WetterService', protocol: 'SOAP', type: 'Ex
 CREATE
   (petshop)-[:USES] -> (loginservice),
   (petshop)-[:USES] -> (wetterservice)
+
+// Online Config
+CREATE (onlineConfigPetshop:OnlineConfigGroup {name:'Production Config for petshop'})
+
+CREATE (ocTpPetShop:OnlineConfig {name:'Tomcat Cluster'})
+CREATE (ocDb:OnlineConfig {name:'Database Cluster'})
+
+// Online Config List
+CREATE
+  (onlineConfigPetshop)-[:CONFIG] -> (production),
+  (onlineConfigPetshop)-[:CONFIG] -> (petshopApp),
+  (onlineConfigPetshop)-[:EL] -> (ocTpPetShop),
+  (onlineConfigPetshop)-[:EL] -> (ocDb)
+
+// OnlineConfig -> Online Services
+CREATE
+  (ocTpPetShop)-[:ONLINE] -> (tomcat1),
+  (ocTpPetShop)-[:ONLINE] -> (tomcat2),
+  (ocDb)-[:ONLINE] -> (db1),
+  (ocDb)-[:ONLINE] -> (db2)

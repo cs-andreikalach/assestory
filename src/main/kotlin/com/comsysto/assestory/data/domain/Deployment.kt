@@ -7,7 +7,7 @@ import org.neo4j.ogm.annotation.Relationship
 
 @NodeEntity
 data class Deployment(
-        @Id @GeneratedValue var id: Long,
+        @Id @GeneratedValue override var id: Long,
         @Id var name: String,
         var version: String,
         var artifact: Artifact,

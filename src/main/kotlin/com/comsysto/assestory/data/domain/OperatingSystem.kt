@@ -7,7 +7,7 @@ import org.neo4j.ogm.annotation.Relationship
 
 @NodeEntity
 data class OperatingSystem(
-        @Id @GeneratedValue var id: Long,
+        @Id @GeneratedValue override var id: Long,
         @Id var host: String,
         var type: OsType,
         var version: String,
@@ -20,6 +20,4 @@ data class OperatingSystem(
         var databases: MutableList<HostsDatabaseRelation>?,
 
         @Relationship(type = "HOSTS", direction = Relationship.OUTGOING)
-        var services: MutableList<HostsServiceRelation>?
-
-) : StateEntity()
+        var services: MutableList<HostsServiceRelation>?) : StateEntity()

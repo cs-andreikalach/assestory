@@ -21,6 +21,20 @@
             </form>
         </li>
     </ul>
+
+    <h2 class="indigo-text center" th:text="|Pethop Online Services|">Pethop Online Services</h2>
+    <ul class="collection">
+        <li class="collection-item" th:each="sys : ${petshopState.online}">
+            <span class="title" th:text="${sys}">Name</span>
+        </li>
+    </ul>
+
+    <h2 class="indigo-text center" th:text="|Pethop Offline Services|">Pethop Offline Services</h2>
+    <ul class="collection">
+        <li class="collection-item" th:each="sys : ${petshopState.offline}">
+            <span class="title" th:text="${sys}">Name</span>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

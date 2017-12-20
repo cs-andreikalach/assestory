@@ -7,11 +7,11 @@ import org.neo4j.ogm.annotation.Relationship
 
 @NodeEntity
 data class Tomcat(
-        @Id @GeneratedValue var id: Long,
+        @Id @GeneratedValue override var id: Long,
         @Id var name: String,
         var version: String,
 
         @Relationship(type = "DEPLOYED", direction = Relationship.OUTGOING)
         var deployments: MutableList<DeployedRelation>?,
 
-        override var state: State) : StateEntity()
+        override var state: State): StateEntity()

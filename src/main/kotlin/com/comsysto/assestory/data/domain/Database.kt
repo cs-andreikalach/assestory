@@ -6,6 +6,6 @@ import org.neo4j.ogm.annotation.NodeEntity
 
 @NodeEntity
 data class Database(
-        @Id @GeneratedValue var id: Long,
+        @Id @GeneratedValue override var id: Long,
         @Id var instance: String,
         override var state: State) : StateEntity()

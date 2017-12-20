@@ -29,3 +29,8 @@ match (o:OperatingSystem {host: 'linux2.petshop.com'}) set o.state='Offline'
 
 // Find shortest path between two nodes with intermediate nodes that have status Online
 MATCH (e:Environment {name:'Production'}), (t:Tomcat), p = shortestPath((e)-[*]-(t)) WHERE t.name IN ['tpPetshop1', 'tpPetshop2'] RETURN filter(n IN nodes(p) WHERE n.state='Online' OR n.state = NULL),e,t
+
+
+
+
+MATCH (e:Environment {name:'Production'}), (t:Tomcat), p = shortestPath((e)-[*]-(t)) WHERE t.name IN ['tpPetshop1', 'tpPetshop2'] WITH filter(n IN nodes(p) WHERE n.state='Online' OR n.state = NULL),e,t MATCH p2=shortestPath((e)-[*]-(t))

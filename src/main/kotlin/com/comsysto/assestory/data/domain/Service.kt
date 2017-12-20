@@ -7,7 +7,7 @@ import org.neo4j.ogm.annotation.Relationship
 
 @NodeEntity
 data class Service(
-        @Id @GeneratedValue var id: Long,
+        @Id @GeneratedValue override var id: Long,
         @Id var name: String,
         var protocol: Protocol,
         var type: ServiceType,
